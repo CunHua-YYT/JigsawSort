@@ -1,7 +1,4 @@
-
-
-# requirements
-
+Requirements
 einops==0.6.0
 numpy==1.23.5
 pandas==1.3.1
@@ -9,40 +6,32 @@ path==16.6.0
 path.py==12.5.0
 pathtools==0.1.2
 Pillow==9.4.0
-PyYAML 
+PyYAML
 timm==0.3.2
 tqdm==4.64.1
 
-和torch框架
+And the torch framework.
 
-# 文件架构
+File Structure
+The configs directory contains YAML files, which can be modified to change parameters.
 
-configs放置 yaml文件，使用时修改其参数
+The output_dir directory contains trained weight files in .pth format and backup configuration files.
 
-output_dir放置训练结果pth权重文件、配置文件备份
+The utils.py file contains commonly used utility functions.
 
-utils.py放置一些常用的工具函数
+The engine.py file contains training-related functions.
 
-engine.py是训练相关的函数
+The datasets.py file handles the division of training and testing datasets.
 
-datasets.py划分训练集和测试集
+The train.py file contains the training code.
 
-train.py是训练代码
+The main.py file loads model weights and performs predictions.
 
-main.py加载模型权重，进行预测
+The argparse parameters store only some experiment-independent parameters, including the configuration file path, and the main purpose is to store result-related paths. After entering the main function, they are only used at the beginning. Then, the parameters from the configuration file (yaml) are reloaded using the set_defaults() function.
 
+The args parameters persist throughout the process and are also backed up with the results.
 
+Usage
+Run infer.py directly for inference and obtain the time taken for prediction on 64-block and 100-block.
 
-argparse的参数只存储一些与该实验性能无关的一些参数
-
-包括配置文件路径，主要是结果保存路径等等 进入main函数之后 只在最开始使用 
-
-之后用配置文件yaml的参数 进行set_defaults()重载
-
-args的参数贯穿始终 并且会进行与结果一起备份
-
-# useage
-
-直接运行infer.py进行推理，得到预测的64块和100块所用时间
-
-路径直接写在下面就好file_path为文件夹路径，single_img_name为要预测图片的名称，可以在configs文件夹下的1.yaml中定义，也可自行更改
+Specify the file path and image name to be predicted directly below. The file_path is the directory path, and single_img_name is the name of the image to be predicted. You can define it in the 1.yaml file in the configs directory or modify it yourself.
